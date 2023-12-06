@@ -1,11 +1,9 @@
 <template>
-  <div class="h-screen bg-red-400"></div>
+  <router-view></router-view>
 </template>
 
 <script>
 export default {};
 </script>
 
-<style>
-
-</style>
+<style></style>

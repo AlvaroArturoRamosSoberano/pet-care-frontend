@@ -9,20 +9,23 @@
     />
     <div class="container ml-auto pr-4 w-auto">
       <ul
-        class="flex flex-col sm:flex-row space-x-2 sm:space-x-14 font-lusitana"
+        class="flex flex-col sm:flex-row space-x-2 sm:space-x-14 font-lusitana text-white"
       >
-        <li>Inicio</li>
+        <li>
+          <router-link to="/">Inicio</router-link>
+        </li>
         <li>Acerca de</li>
         <li>Servicios</li>
         <li>Contactanos</li>
+        <li>
+          <router-link to="/table">Login</router-link>
+        </li>
       </ul>
     </div>
   </div>
 </template>
 
-<script>
-export default {};
-</script>
+<script></script>
 
 <style scoped>
 /* .logo {

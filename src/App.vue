@@ -1,34 +1,21 @@
 <template>
   <div id="app">
-    <header>
-      <Navbar></Navbar>
-    </header>
-
-    <main>
-      <Main></Main>
-    </main>
-    <footer>
-      <About> </About>
-      <Service></Service>
-    </footer>
-    <Footer></Footer>
+    <Navbar></Navbar>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Navbar from "./components/Home-page/Navbar.vue";
-import Main from "./components/Home-page/Main.vue";
-import About from "./components/Home-page/About.vue";
-import Service from "./components/Home-page/Service.vue";
-import Footer from "./components/Home-page/Footer.vue";
+import { defineAsyncComponent } from "vue";
+
 export default {
   name: "App",
   components: {
-    Navbar,
-    Main,
-    About,
-    Service,
-    Footer
+    Navbar: defineAsyncComponent(() =>
+      import(
+        /* wepackChunkName: "Navbar" */ "@/modules/shared/components/Navbar.vue"
+      )
+    )
   }
 };
 </script>
@@ -41,5 +28,8 @@ export default {
 body {
   margin: 0;
   padding: 0;
+}
+a.router-link-exact-active {
+  color: red;
 }
 </style>
