@@ -3,18 +3,55 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   {
     path: "/",
-    name: "HomePage",
-    component: () => import(/* webpackChunkName: "MainPage" */'@/modules/homepage/pages/LandingPage.vue')
+    name: "Home-page",
+    component: () => import("@/modules/homepage/pages/LandingPage.vue")
   },
   {
-    path: "/table",
-    name: "table-route",
-    component: () => import(/* webpackChunkName: "Table" */'@/modules/cruds/pets/components/Table.vue')
-  },
-  {
-    path: "/:pathMatch(.*)*",
-    name: "404",
-    component:  import(/* webpackChunkName: "NoPageFound" */'@/modules/shared/pages/NoPagesFound.vue')
+    path: "/admin",
+    name: "admin-panel",
+    component: () => import("@/modules/cruds/shared/pages/AdminView.vue"),
+    children: [
+      //Rutas Pets
+      {
+        path: "pets",
+        name: "view-pets",
+        component: () => import("@/modules/cruds/pets/components/Table.vue")
+      },
+      {
+        path: "pets/view/create",
+        name: "view-pets-create",
+        component: () =>
+          import("@/modules/cruds/pets/components/FormCreate.vue")
+      },
+      {
+        path: "pets/form/edit/:id",
+        name: "form-pets-edit",
+        component: () => import("@/modules/cruds/pets/components/FormEdit.vue")
+      },
+      //Rutas especies
+      {
+        path: "species",
+        name: "view-species",
+        component: () => import("@/modules/cruds/species/components/Table.vue")
+      },
+      /* {
+        path: "species/view/create",
+        name: "view-species-create",
+        component: () =>
+          import("@/modules/cruds/species/components/Form.vue")
+      },
+      {
+        path: "species/view/edit/:id",
+        name: "view-species-edit",
+        component: () =>
+          import("@/modules/cruds/species/components/Form.vue")
+      }, */
+      {
+        path: "/:pathMatch(.*)*",
+        name: "404",
+        component: import("@/modules/shared/pages/NoPagesFound.vue")
+      }
+    ]
   }
 ];
 
