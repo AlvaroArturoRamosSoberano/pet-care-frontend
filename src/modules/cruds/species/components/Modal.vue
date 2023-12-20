@@ -7,10 +7,12 @@
         v-model="formData.name"
         class="p-2"
         placeholder="Ingrese nombre de la especie"
-      />
+      ></el-input>
       <div class="flex justify-end p-2">
         <el-button @click="dialogFormVisible = false">Cancelar</el-button>
-        <el-button type="success" @click="submitForm"> Confirmar </el-button>
+        <el-button :type="isEditMode ? 'success' : 'primary'" @click="submitForm">
+          {{ isEditMode ? "Actualizar" : "Confirmar" }}
+        </el-button>
       </div>
     </el-form>
   </el-dialog>
@@ -20,44 +22,62 @@
 import { ref } from "vue";
 import {
   sendSpeciesData,
-  getSpecieData,
-  updateSpeciesData
+  updateSpeciesData,
 } from "@/modules/cruds/species/services/ApiSpecies.js";
 import { showNotification } from "@/modules/cruds/shared/functions/Notifications.js";
 export default {
-  props: ["title", "type", "text", "icon"],
+  emits: ["species-updated", "species-added"],
+  props: {
+    title: String,
+    type: String,
+    text: String,
+    icon: Object,
+    id: Number,
+    mode: String,
+    specie: Object,
+  },
   data() {
     return {
       formData: {
         name: "",
       },
       dialogFormVisible: ref(false),
-      editMode: ref(false),
     };
   },
-  mounted() {
-  /*   this.getData(); */
+  computed: {
+    isEditMode() {
+      return this.mode === "edit";
+    },
   },
   methods: {
+    getData(id) {
+      if (id !== null) {
+        this.formData = this.specie;
+      } else {
+        console.log("id es null");
+      }
+    },
     async submitForm() {
       try {
-        await sendSpeciesData(this.formData);
-        showNotification("Éxito", "Excelente", "success");
+        if (this.mode === "edit") {
+          await updateSpeciesData(this.id, this.formData);
+          showNotification("Éxito", "Actualizado con éxito", "success");
+          this.$emit("species-updated");
+        } else {
+          await sendSpeciesData(this.formData);
+          showNotification("Éxito", "Agregado con éxito", "success");
+          this.$emit("species-added");
+        }
         this.dialogFormVisible = false;
         this.resetForm();
       } catch (error) {
         showNotification("Error", error.response.data.message, "error");
       }
     },
-    /* async getData(id) {
-      try {
-        await getSpecieData(id);
-        this.formData = response.data.data;
-      } catch (error) {
-        console.error("Error al obtener datos para editar:", error);
-      }
-    }, */
     openForm() {
+      if (this.id !== null) {
+        this.getData(this.id);
+      }
       this.dialogFormVisible = true;
     },
     resetForm() {

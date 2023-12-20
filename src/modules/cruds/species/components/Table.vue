@@ -21,6 +21,8 @@
               title="Agregar especie"
               :type="buttons.primary"
               :icon="icons.Plus"
+              :id="null"
+              @species-added="refresh"
             ></modal>
           </div>
           <table
@@ -42,13 +44,14 @@
                   {{ specie.name }}
                 </td>
                 <td class="border rounded-lg text-center border-gray-500">
-                  <!-- <router-link :to="'species/form/edit/' + specie.id">
-                    <el-button type="warning" plain :icon="Edit"
-                  /></router-link> -->
                   <modal
                     title="Editar especie"
                     :type="buttons.warning"
                     :icon="icons.Edit"
+                    :id="specie.id"
+                    :mode="isEditMode ? 'edit' : 'normal'"
+                    :specie="specie"
+                    @species-updated="refresh"
                   ></modal>
                   <el-button
                     type="danger"
@@ -65,7 +68,6 @@
             background
             @current-change="changePage"
             small
-            :pager-count="filterParams.pages"
             :total="filterParams.total"
           />
         </div>
@@ -75,7 +77,7 @@
 </template>
 
 <script>
-import { markRaw, defineAsyncComponent, ref } from "vue";
+import { markRaw, defineAsyncComponent } from "vue";
 import { Edit, Delete, Plus } from "@element-plus/icons-vue";
 import {
   getSpeciesData,
@@ -93,6 +95,7 @@ export default {
   },
   data() {
     return {
+      id: "",
       species: [],
       errored: false,
       loading: true,
@@ -109,6 +112,7 @@ export default {
         warning: "warning",
         primary: "primary",
       },
+      isEditMode: true,
     };
   },
   created() {
@@ -141,8 +145,14 @@ export default {
           showMessage("info", "Operación cancelada");
         }
       } catch (error) {
-        showMessage("error", "Error al eliminar especie. Por favor, inténtalo de nuevo.");
+        showMessage(
+          "error",
+          "Error al eliminar registro. Por favor, inténtalo de nuevo."
+        );
       }
+    },
+    refresh() {
+      this.getSpecies();
     },
     changePage(value) {
       this.getSpecies({ page: value });

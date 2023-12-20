@@ -1,4 +1,3 @@
-import { getSpeciesData } from '@/modules/cruds/species/services/ApiSpecies.js';
 <template>
   <div class="h-screen w-screen flex justify-center items-center">
     <div class="bg-white rounded-xl shadow-xl">
@@ -36,11 +35,7 @@ import { getSpeciesData } from '@/modules/cruds/species/services/ApiSpecies.js';
             v-model="formData.hair_color"
             placeholder="Ingrese el color"
           />
-          <el-input
-            class="p-2"
-            v-model="formData.image_path"
-            placeholder="Imagen"
-          />
+          <el-input class="p-2" v-model="formData.image_path" placeholder="Imagen" />
           <el-select
             class="p-2"
             v-model="formData.customer_id"
@@ -55,9 +50,7 @@ import { getSpeciesData } from '@/modules/cruds/species/services/ApiSpecies.js';
             />
           </el-select>
           <div class="p-2 flex justify-end">
-            <el-button @click="submitForm" type="success" plain
-              >Actualizar</el-button
-            >
+            <el-button @click="submitForm" type="success" plain>Actualizar</el-button>
             <router-link to="/admin/pets"
               ><el-button type="primary" plain>Volver</el-button></router-link
             >
@@ -69,10 +62,7 @@ import { getSpeciesData } from '@/modules/cruds/species/services/ApiSpecies.js';
 </template>
 
 <script>
-import {
-  getPetData,
-  updatePetsData
-} from "@/modules/cruds/pets/services/ApiPets.js";
+import { getPetData, updatePetsData } from "@/modules/cruds/pets/services/ApiPets.js";
 import { getSpeciesData } from "@/modules/cruds/species/services/ApiSpecies.js";
 import { getCustomersData } from "@/modules/cruds/customers/services/ApiCustomers.js";
 export default {
@@ -87,8 +77,8 @@ export default {
         specie_id: "",
         hair_color: "",
         image_path: "",
-        customer_id: ""
-      }
+        customer_id: "",
+      },
     };
   },
   mounted() {
@@ -131,9 +121,9 @@ export default {
       ElNotification({
         title: title,
         message: message,
-        type: type
+        type: type,
       });
-    }
-  }
+    },
+  },
 };
 </script>
