@@ -34,17 +34,17 @@ const routes = [
         name: "view-species",
         component: () => import("@/modules/cruds/species/components/Table.vue")
       },
-     /*  {
-        path: "species/view/edit/:id",
-        name: "view-species-edit",
-        component: () =>
-          import("@/modules/cruds/species/components/Modal.vue")
-      }, */
       //Rutas Vaccines
       {
         path: "vaccines",
-        name:"view-vaccines",
+        name: "view-vaccines",
         component: () => import("@/modules/cruds/vaccines/components/Table.vue")
+      },
+      //Rutas Diseases
+      {
+        path: "diseases",
+        name: "view-diseases",
+        component: () => import("@/modules/cruds/diseases/components/Table.vue")
       },
       {
         path: "/:pathMatch(.*)*",

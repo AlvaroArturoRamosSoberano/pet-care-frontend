@@ -8,12 +8,14 @@
         class="flex flex-col sm:flex-row space-x-2 sm:space-x-14 font-lusitana text-white"
       >
         <li>
-          <router-link :to="{ name: 'view-pets' }">Mascotas</router-link>
+          <router-link :to="{ name: 'view-pets' }">Pets</router-link>
         </li>
         <li>
           <router-link :to="{ name: 'view-species' }">Species</router-link>
         </li>
-        <li>Razas</li>
+        <li>
+          <router-link :to="{ name: 'view-diseases' }">Diseases</router-link>
+        </li>
         <li>
           <router-link :to="{ name: 'view-vaccines' }">Vaccines</router-link>
         </li>
