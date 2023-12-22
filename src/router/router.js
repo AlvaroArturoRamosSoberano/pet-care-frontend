@@ -34,19 +34,18 @@ const routes = [
         name: "view-species",
         component: () => import("@/modules/cruds/species/components/Table.vue")
       },
-      {
+     /*  {
         path: "species/view/edit/:id",
         name: "view-species-edit",
         component: () =>
           import("@/modules/cruds/species/components/Modal.vue")
+      }, */
+      //Rutas Vaccines
+      {
+        path: "vaccines",
+        name:"view-vaccines",
+        component: () => import("@/modules/cruds/vaccines/components/Table.vue")
       },
-      /* {
-        path: "species/view/create",
-        name: "view-species-create",
-        component: () =>
-          import("@/modules/cruds/species/components/Form.vue")
-      },
-       */
       {
         path: "/:pathMatch(.*)*",
         name: "404",

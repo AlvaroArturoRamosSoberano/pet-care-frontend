@@ -14,7 +14,9 @@
           <router-link :to="{ name: 'view-species' }">Species</router-link>
         </li>
         <li>Razas</li>
-        <li>Vacunas</li>
+        <li>
+          <router-link :to="{ name: 'view-vaccines' }">Vaccines</router-link>
+        </li>
         <li>
           <router-link :to="{ name: 'Home-page' }">Log out</router-link>
         </li>
