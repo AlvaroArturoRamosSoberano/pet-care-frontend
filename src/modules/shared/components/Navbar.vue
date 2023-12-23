@@ -20,6 +20,9 @@
           <router-link :to="{ name: 'view-vaccines' }">Vaccines</router-link>
         </li>
         <li>
+          <router-link :to="{ name: 'view-breeds' }">Breeds</router-link>
+        </li>
+        <li>
           <router-link :to="{ name: 'Home-page' }">Log out</router-link>
         </li>
       </ul>

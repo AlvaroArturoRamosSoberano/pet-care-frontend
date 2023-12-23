@@ -46,6 +46,12 @@ const routes = [
         name: "view-diseases",
         component: () => import("@/modules/cruds/diseases/components/Table.vue")
       },
+      //Rutas Breeds
+      {
+        path: "breeds",
+        name: "view-breeds",
+        component: () => import("@/modules/cruds/breeds/components/Table.vue")
+      },
       {
         path: "/:pathMatch(.*)*",
         name: "404",
